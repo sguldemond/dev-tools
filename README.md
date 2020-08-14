@@ -44,3 +44,37 @@ $ cat .env
 export FOO=bar
 $ cat .env >> venv/bin/activate
 ```
+
+### VSCode settings
+
+- [Black](https://github.com/psf/black) as formatting standard
+- [Jedi](https://github.com/davidhalter/jedi) for better autocompletion then Pylance
+```
+$ cat .vscode/settings.json
+{
+    "python.formatting.provider": "black",
+    "python.languageServer": "Jedi"
+}
+```
+
+## Certbot
+
+### Create certificates
+
+```
+$ certbot certonly --standalone -d foo.bar.com
+```
+
+### Auto renew certificates (still testing)
+
+```
+$ cat renew.sh
+docker stop container-on-port-80-and-443
+sudo certbot renew
+docker start container-on-port-80-and-443
+
+$ sudo crontab -e
+0 0 */9 * * bash /dir/renew.sh > /dir/cron.log (check every 9 days for renewal)
+```
+
+
