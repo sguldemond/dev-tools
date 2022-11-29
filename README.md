@@ -29,6 +29,11 @@ repos:
   -   id: mypy
 ```
 
+Run pre-commit on a folder:
+```
+$ git ls-files -- project1 | xargs pre-commit run --files
+```
+
 ## Python
 
 ### Keeping pip packages up-to-date
